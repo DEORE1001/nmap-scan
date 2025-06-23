@@ -1,0 +1,82 @@
+
+Task 1 Report: Local Network Port Scanning using Nmap
+Submitted by: Deore Rohit
+Internship Domain: Cybersecurity
+Date: 23 June 2025
+Objective
+The main goal of this task was to perform a port scan on my local network using Nmap to identify active hosts and open ports, which helps in understanding network exposure and basic reconnaissance.
+
+Tools Used
+Nmap – for network and port scanning
+
+Operating System: Kali Linux
+
+Optional Tool Considered: Wireshark (not used in this task)
+
+Steps Performed
+Installed Nmap from the official website (already available on Kali Linux by default).
+
+Found my local IP range. Based on my current setup, the local subnet was identified as 192.168.1.0/24.
+
+Ran the TCP SYN scan using the following command:
+
+bash
+Copy
+Edit
+nmap -sS 192.168.1.0/24
+Nmap scanned all 256 IPs in the subnet and identified 4 active hosts.
+
+Recorded the IP addresses, open ports, services, and MAC addresses from the results.
+
+Scan Results Summary
+➤ Host 1: 192.168.1.1 (Syrotech Router)
+Open Ports: 21 (FTP), 22 (SSH), 53 (DNS), 80 (HTTP), 443 (HTTPS)
+
+Filtered Port: 23 (Telnet)
+
+MAC: 7C:A9:6B:E4:8A:5F
+
+Comment: Common router services are exposed. SSH and Telnet can be risky if not secured.
+
+➤ Host 2: 192.168.1.2 (Likely a Windows System)
+Open Ports: 135, 139, 445, 903, 2869, 5357
+
+MAC: D4:1B:81:F6:F7:25
+
+Comment: NetBIOS and SMB ports are exposed which are often targeted in lateral movement or file-sharing exploits.
+
+➤ Host 3: 192.168.1.4 (Unknown Device)
+All 1000 ports closed
+
+MAC: A2:74:78:C4:B1:56
+
+Comment: Possibly a mobile device with no services running or strict firewall policies.
+
+➤ Host 4: 192.168.1.8 (Another Quiet Device)
+All 1000 ports closed
+
+Comment: Likely a system with no exposed services or a well-secured device.
+
+Observations & Learning Outcomes
+Learned how to identify live hosts and their running services.
+
+Gained understanding of what common open ports represent and the associated risks (e.g., FTP or SMB).
+
+Understood how TCP SYN scan works and why it's often used in reconnaissance.
+
+Improved hands-on familiarity with tools used in real-world penetration testing.
+
+Risks Identified
+Open FTP, SSH, and SMB ports can become attack vectors if weak credentials or outdated services exist.
+
+Telnet was filtered but present — outdated protocol and should ideally be disabled.
+
+Security Recommendations
+Disable unused services on devices.
+
+Use strong authentication and firewalls to restrict access to sensitive ports.
+
+Regularly scan the network to identify any unexpected exposure.
+
+Conclusion
+This task helped me strengthen my understanding of internal network security, port scanning techniques, and identification of potential risks due to open services. It was a valuable step towards mastering basic reconnaissance in ethical hacking.
