@@ -1,82 +1,85 @@
+Local Network Port Scanning using Nmap - Report
+===============================================
 
-Task 1 Report: Local Network Port Scanning using Nmap
 Submitted by: Deore Rohit
 Internship Domain: Cybersecurity
 Date: 23 June 2025
+
 Objective
-The main goal of this task was to perform a port scan on my local network using Nmap to identify active hosts and open ports, which helps in understanding network exposure and basic reconnaissance.
+---------
+The main goal of this task was to perform a port scan on my local network using Nmap 
+to identify active hosts and open ports, which helps in understanding network exposure 
+and basic reconnaissance.
 
 Tools Used
-Nmap – for network and port scanning
+---------
+- Nmap (Network and port scanning)
+- Operating System: Kali Linux (Nmap pre-installed)
+- Optional Tool Considered: Wireshark (not used in this task)
 
-Operating System: Kali Linux
+Methodology
+-----------
+1. Identified local IP range: 192.168.1.0/24
+2. Performed TCP SYN scan using command:
+   nmap -sS 192.168.1.0/24
+3. Scanned all 256 IPs in the subnet
+4. Identified 4 active hosts
+5. Recorded IP addresses, open ports, services, and MAC addresses
 
-Optional Tool Considered: Wireshark (not used in this task)
+Scan Results
+------------
+Host 1: 192.168.1.1 (Syrotech Router)
+- Open Ports: 
+  21 (FTP), 22 (SSH), 53 (DNS), 80 (HTTP), 443 (HTTPS)
+- Filtered Port: 
+  23 (Telnet)
+- MAC: 7C:A9:6B:E4:8A:5F
+- Comment: Common router services exposed. SSH and Telnet can be risky if not secured.
 
-Steps Performed
-Installed Nmap from the official website (already available on Kali Linux by default).
+Host 2: 192.168.1.2 (Likely Windows System)
+- Open Ports: 
+  135, 139, 445, 903, 2869, 5357
+- MAC: D4:1B:81:F6:F7:25
+- Comment: NetBIOS and SMB ports exposed (common targets for lateral movement/file-sharing exploits)
 
-Found my local IP range. Based on my current setup, the local subnet was identified as 192.168.1.0/24.
+Host 3: 192.168.1.4 (Unknown Device)
+- Status: All 1000 ports closed
+- MAC: A2:74:78:C4:B1:56
+- Comment: Possibly a mobile device with no services running or strict firewall policies
 
-Ran the TCP SYN scan using the following command:
+Host 4: 192.168.1.8 (Unknown Device)
+- Status: All 1000 ports closed
+- Comment: Likely a system with no exposed services or well-secured device
 
-bash
-Copy
-Edit
-nmap -sS 192.168.1.0/24
-Nmap scanned all 256 IPs in the subnet and identified 4 active hosts.
+Key Observations
+---------------
+- Learned to identify live hosts and running services
+- Understood common open ports and associated risks (FTP, SMB, etc.)
+- Gained practical knowledge of TCP SYN scan methodology
+- Improved hands-on experience with penetration testing tools
 
-Recorded the IP addresses, open ports, services, and MAC addresses from the results.
-
-Scan Results Summary
-➤ Host 1: 192.168.1.1 (Syrotech Router)
-Open Ports: 21 (FTP), 22 (SSH), 53 (DNS), 80 (HTTP), 443 (HTTPS)
-
-Filtered Port: 23 (Telnet)
-
-MAC: 7C:A9:6B:E4:8A:5F
-
-Comment: Common router services are exposed. SSH and Telnet can be risky if not secured.
-
-➤ Host 2: 192.168.1.2 (Likely a Windows System)
-Open Ports: 135, 139, 445, 903, 2869, 5357
-
-MAC: D4:1B:81:F6:F7:25
-
-Comment: NetBIOS and SMB ports are exposed which are often targeted in lateral movement or file-sharing exploits.
-
-➤ Host 3: 192.168.1.4 (Unknown Device)
-All 1000 ports closed
-
-MAC: A2:74:78:C4:B1:56
-
-Comment: Possibly a mobile device with no services running or strict firewall policies.
-
-➤ Host 4: 192.168.1.8 (Another Quiet Device)
-All 1000 ports closed
-
-Comment: Likely a system with no exposed services or a well-secured device.
-
-Observations & Learning Outcomes
-Learned how to identify live hosts and their running services.
-
-Gained understanding of what common open ports represent and the associated risks (e.g., FTP or SMB).
-
-Understood how TCP SYN scan works and why it's often used in reconnaissance.
-
-Improved hands-on familiarity with tools used in real-world penetration testing.
-
-Risks Identified
-Open FTP, SSH, and SMB ports can become attack vectors if weak credentials or outdated services exist.
-
-Telnet was filtered but present — outdated protocol and should ideally be disabled.
+Identified Risks
+----------------
+1. Open FTP, SSH, and SMB ports could become attack vectors with weak credentials
+2. Telnet service filtered but present (outdated protocol, security risk)
+3. Windows system exposing NetBIOS/SMB ports (common attack surface)
 
 Security Recommendations
-Disable unused services on devices.
-
-Use strong authentication and firewalls to restrict access to sensitive ports.
-
-Regularly scan the network to identify any unexpected exposure.
+------------------------
+1. Disable unused services on all network devices
+2. Implement strong authentication for exposed services
+3. Configure firewalls to restrict access to sensitive ports
+4. Regularly scan network to monitor for unexpected exposures
+5. Disable Telnet completely (use SSH instead)
+6. Apply security patches for services like SMB
 
 Conclusion
-This task helped me strengthen my understanding of internal network security, port scanning techniques, and identification of potential risks due to open services. It was a valuable step towards mastering basic reconnaissance in ethical hacking.
+----------
+This exercise provided valuable experience in:
+- Internal network security assessment
+- Practical port scanning techniques
+- Identification of potential security risks
+- Basic reconnaissance methodology
+
+The task significantly contributed to my understanding of ethical hacking fundamentals 
+and network security analysis.
